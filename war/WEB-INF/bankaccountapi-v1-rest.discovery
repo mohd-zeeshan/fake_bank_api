@@ -1,0 +1,239 @@
+{
+ "kind": "discovery#restDescription",
+ "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/2UXAWli5z_ieZaZSrUswU_6DqGo\"",
+ "discoveryVersion": "v1",
+ "id": "bankaccountapi:v1",
+ "name": "bankaccountapi",
+ "version": "v1",
+ "description": "An API to manage bank accounts",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rest",
+ "baseUrl": "https://bank-1350.appspot.com/_ah/api/bankaccountapi/v1/",
+ "basePath": "/_ah/api/bankaccountapi/v1/",
+ "rootUrl": "https://bank-1350.appspot.com/_ah/api/",
+ "servicePath": "bankaccountapi/v1/",
+ "batchPath": "batch",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "BankAccount": {
+   "id": "BankAccount",
+   "type": "object",
+   "properties": {
+    "accountHolder": {
+     "type": "string"
+    },
+    "accountNumber": {
+     "type": "string",
+     "format": "int64"
+    },
+    "balance": {
+     "type": "string"
+    },
+    "bankName": {
+     "type": "string"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    }
+   }
+  },
+  "CollectionResponse_BankAccount": {
+   "id": "CollectionResponse_BankAccount",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "BankAccount"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "getBankAccount": {
+   "id": "bankaccountapi.getBankAccount",
+   "path": "bankaccount/{accountNumber}",
+   "httpMethod": "GET",
+   "parameters": {
+    "accountNumber": {
+     "type": "string",
+     "required": true,
+     "format": "int64",
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "accountNumber"
+   ],
+   "response": {
+    "$ref": "BankAccount"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "insertBankAccount": {
+   "id": "bankaccountapi.insertBankAccount",
+   "path": "bankaccount",
+   "httpMethod": "POST",
+   "request": {
+    "$ref": "BankAccount",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "BankAccount"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "listBankAccount": {
+   "id": "bankaccountapi.listBankAccount",
+   "path": "bankaccount",
+   "httpMethod": "GET",
+   "parameters": {
+    "cursor": {
+     "type": "string",
+     "location": "query"
+    },
+    "limit": {
+     "type": "integer",
+     "format": "int32",
+     "location": "query"
+    }
+   },
+   "response": {
+    "$ref": "CollectionResponse_BankAccount"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "listBankAccountByUserId": {
+   "id": "bankaccountapi.listBankAccountByUserId",
+   "path": "collectionresponse_bankaccount/{userId}",
+   "httpMethod": "GET",
+   "parameters": {
+    "cursor": {
+     "type": "string",
+     "location": "query"
+    },
+    "limit": {
+     "type": "integer",
+     "format": "int32",
+     "location": "query"
+    },
+    "userId": {
+     "type": "string",
+     "required": true,
+     "format": "int64",
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "userId"
+   ],
+   "response": {
+    "$ref": "CollectionResponse_BankAccount"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "removeBankAccount": {
+   "id": "bankaccountapi.removeBankAccount",
+   "path": "bankaccount/{accountNumber}",
+   "httpMethod": "DELETE",
+   "parameters": {
+    "accountNumber": {
+     "type": "string",
+     "required": true,
+     "format": "int64",
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "accountNumber"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "updateBankAccount": {
+   "id": "bankaccountapi.updateBankAccount",
+   "path": "bankaccount",
+   "httpMethod": "PUT",
+   "request": {
+    "$ref": "BankAccount",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "BankAccount"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}

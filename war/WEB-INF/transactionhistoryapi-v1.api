@@ -1,0 +1,242 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://bank-1350.appspot.com/_ah/api",
+  "name" : "transactionhistoryapi",
+  "version" : "v1",
+  "description" : "An API to manage Transactions",
+  "defaultVersion" : false,
+  "discovery" : [ "PUBLIC" ],
+  "adapter" : {
+    "bns" : "https://bank-1350.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "transactionhistoryapi.insertTransactionHistory" : {
+      "path" : "transactionhistory",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.TransactionHistoryEndPoint.insertTransactionHistory",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionhistoryapi.listTransactionHistory" : {
+      "path" : "transactionhistory",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.TransactionHistoryEndPoint.listTransactionHistory",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionhistoryapi.listTransactionHistoryByUserId" : {
+      "path" : "collectionresponse_transactionhistory/{userId}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.TransactionHistoryEndPoint.getTransactionHistoryByUserId",
+      "request" : {
+        "parameters" : {
+          "userId" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionhistoryapi.getTransactionHistory" : {
+      "path" : "transactionhistory/{transactionId}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.TransactionHistoryEndPoint.getTransactionHistory",
+      "request" : {
+        "parameters" : {
+          "transactionId" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionhistoryapi.updateTransactionHistory" : {
+      "path" : "transactionhistory",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.TransactionHistoryEndPoint.updateTransactionHistory",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionhistoryapi.removeTransactionHistory" : {
+      "path" : "transactionhistory/{transactionId}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.TransactionHistoryEndPoint.removeTransactionHistory",
+      "request" : {
+        "parameters" : {
+          "transactionId" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "TransactionHistory" : {
+        "id" : "TransactionHistory",
+        "type" : "object",
+        "properties" : {
+          "transactionId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "userId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "withdrawal" : {
+            "type" : "string"
+          },
+          "deposit" : {
+            "type" : "string"
+          },
+          "balance" : {
+            "type" : "string"
+          },
+          "transactionDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "transactionDescription" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_TransactionHistory" : {
+        "id" : "CollectionResponse_TransactionHistory",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "TransactionHistory"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.service.TransactionHistoryEndPoint.insertTransactionHistory" : {
+        "request" : {
+          "$ref" : "TransactionHistory"
+        },
+        "response" : {
+          "$ref" : "TransactionHistory"
+        }
+      },
+      "com.service.TransactionHistoryEndPoint.listTransactionHistory" : {
+        "response" : {
+          "$ref" : "CollectionResponse_TransactionHistory"
+        }
+      },
+      "com.service.TransactionHistoryEndPoint.getTransactionHistoryByUserId" : {
+        "response" : {
+          "$ref" : "CollectionResponse_TransactionHistory"
+        }
+      },
+      "com.service.TransactionHistoryEndPoint.getTransactionHistory" : {
+        "response" : {
+          "$ref" : "TransactionHistory"
+        }
+      },
+      "com.service.TransactionHistoryEndPoint.updateTransactionHistory" : {
+        "request" : {
+          "$ref" : "TransactionHistory"
+        },
+        "response" : {
+          "$ref" : "TransactionHistory"
+        }
+      },
+      "com.service.TransactionHistoryEndPoint.removeTransactionHistory" : {
+      }
+    }
+  }
+}

@@ -1,0 +1,246 @@
+{
+ "kind": "discovery#restDescription",
+ "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/5zDcFcTy_iQ0yq1FjMDFqq6Xf88\"",
+ "discoveryVersion": "v1",
+ "id": "transactionhistoryapi:v1",
+ "name": "transactionhistoryapi",
+ "version": "v1",
+ "description": "An API to manage Transactions",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rest",
+ "baseUrl": "https://bank-1350.appspot.com/_ah/api/transactionhistoryapi/v1/",
+ "basePath": "/_ah/api/transactionhistoryapi/v1/",
+ "rootUrl": "https://bank-1350.appspot.com/_ah/api/",
+ "servicePath": "transactionhistoryapi/v1/",
+ "batchPath": "batch",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "CollectionResponse_TransactionHistory": {
+   "id": "CollectionResponse_TransactionHistory",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "TransactionHistory"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    }
+   }
+  },
+  "TransactionHistory": {
+   "id": "TransactionHistory",
+   "type": "object",
+   "properties": {
+    "balance": {
+     "type": "string"
+    },
+    "deposit": {
+     "type": "string"
+    },
+    "transactionDate": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "transactionDescription": {
+     "type": "string"
+    },
+    "transactionId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "userId": {
+     "type": "string",
+     "format": "int64"
+    },
+    "withdrawal": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "getTransactionHistory": {
+   "id": "transactionhistoryapi.getTransactionHistory",
+   "path": "transactionhistory/{transactionId}",
+   "httpMethod": "GET",
+   "parameters": {
+    "transactionId": {
+     "type": "string",
+     "required": true,
+     "format": "int64",
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "transactionId"
+   ],
+   "response": {
+    "$ref": "TransactionHistory"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "insertTransactionHistory": {
+   "id": "transactionhistoryapi.insertTransactionHistory",
+   "path": "transactionhistory",
+   "httpMethod": "POST",
+   "request": {
+    "$ref": "TransactionHistory",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "TransactionHistory"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "listTransactionHistory": {
+   "id": "transactionhistoryapi.listTransactionHistory",
+   "path": "transactionhistory",
+   "httpMethod": "GET",
+   "parameters": {
+    "cursor": {
+     "type": "string",
+     "location": "query"
+    },
+    "limit": {
+     "type": "integer",
+     "format": "int32",
+     "location": "query"
+    }
+   },
+   "response": {
+    "$ref": "CollectionResponse_TransactionHistory"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "listTransactionHistoryByUserId": {
+   "id": "transactionhistoryapi.listTransactionHistoryByUserId",
+   "path": "collectionresponse_transactionhistory/{userId}",
+   "httpMethod": "GET",
+   "parameters": {
+    "cursor": {
+     "type": "string",
+     "location": "query"
+    },
+    "limit": {
+     "type": "integer",
+     "format": "int32",
+     "location": "query"
+    },
+    "userId": {
+     "type": "string",
+     "required": true,
+     "format": "int64",
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "userId"
+   ],
+   "response": {
+    "$ref": "CollectionResponse_TransactionHistory"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "removeTransactionHistory": {
+   "id": "transactionhistoryapi.removeTransactionHistory",
+   "path": "transactionhistory/{transactionId}",
+   "httpMethod": "DELETE",
+   "parameters": {
+    "transactionId": {
+     "type": "string",
+     "required": true,
+     "format": "int64",
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "transactionId"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "updateTransactionHistory": {
+   "id": "transactionhistoryapi.updateTransactionHistory",
+   "path": "transactionhistory",
+   "httpMethod": "PUT",
+   "request": {
+    "$ref": "TransactionHistory",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "TransactionHistory"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}

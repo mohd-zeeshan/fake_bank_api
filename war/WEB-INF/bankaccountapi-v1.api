@@ -1,0 +1,235 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://bank-1350.appspot.com/_ah/api",
+  "name" : "bankaccountapi",
+  "version" : "v1",
+  "description" : "An API to manage bank accounts",
+  "defaultVersion" : false,
+  "discovery" : [ "PUBLIC" ],
+  "adapter" : {
+    "bns" : "https://bank-1350.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "bankaccountapi.listBankAccountByUserId" : {
+      "path" : "collectionresponse_bankaccount/{userId}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.BankAccountEndPoint.getBankAccountByEmail",
+      "request" : {
+        "parameters" : {
+          "userId" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "bankaccountapi.updateBankAccount" : {
+      "path" : "bankaccount",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.BankAccountEndPoint.updateBankAccount",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "bankaccountapi.removeBankAccount" : {
+      "path" : "bankaccount/{accountNumber}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.BankAccountEndPoint.removeBankAccount",
+      "request" : {
+        "parameters" : {
+          "accountNumber" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "bankaccountapi.insertBankAccount" : {
+      "path" : "bankaccount",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.BankAccountEndPoint.insertBankAccount",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "bankaccountapi.getBankAccount" : {
+      "path" : "bankaccount/{accountNumber}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.BankAccountEndPoint.getBankAccount",
+      "request" : {
+        "parameters" : {
+          "accountNumber" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "bankaccountapi.listBankAccount" : {
+      "path" : "bankaccount",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.service.BankAccountEndPoint.listBankAccount",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CollectionResponse_BankAccount" : {
+        "id" : "CollectionResponse_BankAccount",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "BankAccount"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BankAccount" : {
+        "id" : "BankAccount",
+        "type" : "object",
+        "properties" : {
+          "accountNumber" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "userId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "bankName" : {
+            "type" : "string"
+          },
+          "accountHolder" : {
+            "type" : "string"
+          },
+          "balance" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.service.BankAccountEndPoint.getBankAccountByEmail" : {
+        "response" : {
+          "$ref" : "CollectionResponse_BankAccount"
+        }
+      },
+      "com.service.BankAccountEndPoint.updateBankAccount" : {
+        "request" : {
+          "$ref" : "BankAccount"
+        },
+        "response" : {
+          "$ref" : "BankAccount"
+        }
+      },
+      "com.service.BankAccountEndPoint.removeBankAccount" : {
+      },
+      "com.service.BankAccountEndPoint.insertBankAccount" : {
+        "request" : {
+          "$ref" : "BankAccount"
+        },
+        "response" : {
+          "$ref" : "BankAccount"
+        }
+      },
+      "com.service.BankAccountEndPoint.getBankAccount" : {
+        "response" : {
+          "$ref" : "BankAccount"
+        }
+      },
+      "com.service.BankAccountEndPoint.listBankAccount" : {
+        "response" : {
+          "$ref" : "CollectionResponse_BankAccount"
+        }
+      }
+    }
+  }
+}
